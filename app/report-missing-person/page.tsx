@@ -77,7 +77,7 @@ function ProfileForm() {
             <FormItem>
               <FormLabel>Age</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="22 years" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

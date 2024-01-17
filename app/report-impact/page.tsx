@@ -2,6 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NavigateHome } from "@/components/NavigateHome";
+import { HeaderGroup } from "@/components/HeaderGroup";
 
 export default function ReportImpact() {
   return (
@@ -17,7 +18,9 @@ const Navigation = () => {
   return (
     <div className="py-4 text-base font-semibold pb-16">
       <NavigateHome />
-      <div className="text-center">Report your impact ❤️</div>
+      <HeaderGroup>
+        <p className="text-[60%]">Report your impact ❤️</p>
+      </HeaderGroup>
     </div>
   );
 };

@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 
 import { NavigateHome } from "@/components/NavigateHome";
 import { ReportImpactBtn } from "@/components/ReportImpact";
+import { HeaderGroup } from "@/components/HeaderGroup";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -27,15 +28,15 @@ export default function ReportMissingPerson() {
   return (
     <div className="space-y-[26px] py-6">
       <NavigateHome />
-      <hgroup className="text-4xl font-medium text-center">
+      <HeaderGroup>
         <p>I Made Blood Donation</p>
         <p className="text-em-black text-[72%]">
           Fill appropriately and accordingly
         </p>
-        <p className="text-base font-bold">
+        <p className="text-base font-bold text=[50%]">
           Your data is anonymous and kept secure
         </p>
-      </hgroup>
+      </HeaderGroup>
       <div className="space-y-[32px]">
         <ProfileForm />
       </div>
