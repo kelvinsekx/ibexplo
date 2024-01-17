@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 
 import { NavigateHome } from "@/components/NavigateHome";
 import { ReportImpactBtn } from "@/components/ReportImpact";
+import { HeaderGroup } from "@/components/HeaderGroup";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -27,16 +28,16 @@ export default function ReportMissingPerson() {
   return (
     <div className="space-y-[26px] py-6">
       <NavigateHome />
-      <hgroup className="text-4xl font-medium text-center">
+      <HeaderGroup>
         <p>Missing person</p>
-        <p className="text-em-black text-[72%]">
+        <p className="text-em-black leading-7 text-[72%]">
           Create a missing person record
         </p>
-        <p className="text-base">Fill appropriately and accordingly</p>
-      </hgroup>
+        <p className="text-[40%]">Fill appropriately and accordingly</p>
+      </HeaderGroup>
       <div className="space-y-[32px]">
         <ProfileForm />
-        <footer className="flex flex-col items-center pt-40">
+        <footer className="text-center pt-40 flex flex-col justify-center">
           <ReportImpactBtn />
           <small className="text-xs pt-10">
             Updates are real time, Last Website Update : 10:07AM
