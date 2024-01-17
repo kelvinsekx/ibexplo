@@ -60,7 +60,7 @@ const Impacts = () => {
 const Card: React.FC<React.ComponentPropsWithoutRef<"div">> = ({
   children,
 }) => (
-  <div className="border border-em-red rounded-md p-2.5 flex flex-col justify-center  items-center min-h-40 font-semibold md:w-[30%]">
+  <div className="border border-em-red rounded-md p-2.5 flex flex-col justify-center  items-center min-h-40 font-semibold w-[70%] md:w-[30%]">
     {children}
   </div>
 );
