@@ -29,7 +29,7 @@ export default function Home() {
         </div>
         <div className="lg:w-[80%] mx-auto">
           <article id="missing-person-components" className="space-y-3">
-            <header className="text-xl font-semibold pl-10">
+            <header className="text-xl font-semibold max-md:text-center md:pl-10">
               Missing persons
             </header>
             <Link
