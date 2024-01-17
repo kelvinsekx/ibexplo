@@ -4,7 +4,7 @@ export default function FindDonate() {
   return (
     <div className="space-y-[26px] py-6">
       <NavigateHome />
-      <hgroup className="text-4xl font-medium text-center">
+      <hgroup className="text-2xl leading-7 md:text-4xl font-medium text-center">
         <p>Where to donate Blood</p>
         <p className="text-em-black text-[72%]">
           Donate blood to help victim of the blast
@@ -70,12 +70,6 @@ export default function FindDonate() {
             </article>
           </div>
         ))}
-        <footer className="text-center pt-40">
-          <p className="text-base font-semibold">Report your impact ❤️</p>
-          <small className="text-xs pt-10">
-            Updates are real time, Last Website Update : 10:07AM
-          </small>
-        </footer>
       </div>
     </div>
   );
