@@ -34,7 +34,7 @@ export default function Home() {
             </header>
             <Link
               href="/missing-person"
-              className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border-2 border-em-grey"
+              className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border border-em-grey"
             >
               <div className="w-[40%]">IMG</div>
               <div className="font-semibold text-sm">
