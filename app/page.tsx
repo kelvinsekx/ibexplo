@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Card } from "@/components/Card";
 import { ActionBox } from "@/components/ActionBox";
 import { Button } from "@/components/ui/button";
+import { ReportImpactBtn } from "@/components/ReportImpact";
 
 export default function Home() {
   return (
@@ -45,9 +46,7 @@ export default function Home() {
           </article>
         </div>
         <footer className="text-center pt-40 flex flex-col justify-center">
-          <Link href={"/report-impact"}>
-            <Button>Report your impact ❤️</Button>
-          </Link>
+          <ReportImpactBtn />
           <small className="text-xs pt-10">
             Updates are real time, Last Website Update : 10:07AM
           </small>

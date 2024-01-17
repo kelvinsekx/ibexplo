@@ -28,20 +28,16 @@ export default function ReportMissingPerson() {
     <div className="space-y-[26px] py-6">
       <NavigateHome />
       <hgroup className="text-4xl font-medium text-center">
-        <p>Missing person</p>
+        <p>I Made Blood Donation</p>
         <p className="text-em-black text-[72%]">
-          Create a missing person record
+          Fill appropriately and accordingly
         </p>
-        <p className="text-base">Fill appropriately and accordingly</p>
+        <p className="text-base font-bold">
+          Your data is anonymous and kept secure
+        </p>
       </hgroup>
       <div className="space-y-[32px]">
         <ProfileForm />
-        <footer className="flex flex-col items-center pt-40">
-          <ReportImpactBtn />
-          <small className="text-xs pt-10">
-            Updates are real time, Last Website Update : 10:07AM
-          </small>
-        </footer>
       </div>
     </div>
   );
@@ -149,7 +145,7 @@ function ProfileForm() {
           )}
         />
         <div className="flex justify-end">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Report</Button>
         </div>
       </form>
     </Form>

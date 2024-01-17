@@ -1,6 +1,9 @@
+import { NavigateHome } from "@/components/NavigateHome";
+
 export default function FindDonate() {
   return (
     <div className="space-y-[26px] py-6">
+      <NavigateHome />
       <hgroup className="text-4xl font-medium text-center">
         <p>Where to donate Blood</p>
         <p className="text-em-black text-[72%]">
