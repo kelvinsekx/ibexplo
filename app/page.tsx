@@ -17,7 +17,6 @@ async function getData() {
 }
 export default async function Home() {
   const data = await getData();
-  console.log(data);
   return (
     <div className="space-y-[26px] py-6">
       <p className="text-xl font-medium text-center">
