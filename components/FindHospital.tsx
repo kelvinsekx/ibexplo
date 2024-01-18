@@ -1,5 +1,5 @@
 "use client";
-const handleGetDir = (address) => {
+const handleGetDir = (address: string) => {
   const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
     address,
   )}`;
