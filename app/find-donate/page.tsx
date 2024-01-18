@@ -2,13 +2,6 @@ import { NavigateHome } from "@/components/NavigateHome";
 import { FindHospital } from "@/components/FindHospital";
 import { hospitals } from "@/lib/static-db";
 
-const handleGetDir = (address) => {
-  const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-    address,
-  )}`;
-  window.open(googleMapsUrl);
-};
-
 export default function FindDonate() {
   return (
     <div className="space-y-[26px] py-6">
