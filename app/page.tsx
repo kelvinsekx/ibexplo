@@ -43,24 +43,37 @@ export default async function Home() {
             <header className="text-xl font-semibold max-md:text-center md:pl-10">
               Missing persons
             </header>
-            {data.map((person, index) => {
-              return (
-                <Link
-                  key={index}
-                  href="/missing-person"
-                  className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border border-em-grey"
-                >
-                  <div className="w-[40%]">IMG</div>
-                  <div className="font-semibold text-sm">
-                    <p className="text-xl">{person.name}</p>
-                    <p>
-                      {person.age} yrs, {person.skinColor}
-                    </p>
-                    <p>Speaks {person.languages}</p>
-                  </div>
-                </Link>
-              );
-            })}
+            {data.map(
+              (
+                person: {
+                  name: string;
+                  age: string;
+                  skinColor: string;
+                  languages: string;
+                  reportedBy: string;
+                  phoneNumber: string;
+                  relationshipWithPerson: string;
+                },
+                index,
+              ) => {
+                return (
+                  <Link
+                    key={index}
+                    href="/missing-person"
+                    className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border border-em-grey"
+                  >
+                    <div className="w-[40%]">IMG</div>
+                    <div className="font-semibold text-sm">
+                      <p className="text-xl">{person.name}</p>
+                      <p>
+                        {person.age} yrs, {person.skinColor}
+                      </p>
+                      <p>Speaks {person.languages}</p>
+                    </div>
+                  </Link>
+                );
+              },
+            )}
           </article>
         </div>
         <footer className="text-center pt-40 flex flex-col justify-center">
