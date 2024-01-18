@@ -99,7 +99,7 @@ function ProfileForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     await axios
-      .post(process.env.BASE_URL + "/api/missing-persons", values)
+      .post(process.env.NEXT_PUBLIC_BASE_URL + "/api/missing-persons", values)
       .then((res) => {
         toast({
           title: "Success",

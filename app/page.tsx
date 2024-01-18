@@ -6,9 +6,12 @@ import { Button } from "@/components/ui/button";
 import { ReportImpactBtn } from "@/components/ReportImpact";
 
 async function getData() {
-  const res = await fetch(process.env.BASE_URL + "/api/missing-persons", {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/api/missing-persons",
+    {
+      cache: "no-store",
+    },
+  );
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
