@@ -6,8 +6,9 @@ const MissingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    photoOfMissingPerson: {
+    photo: {
       type: String,
+      required: true,
     },
     age: {
       type: Number,
@@ -28,6 +29,7 @@ const MissingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     relationshipWithPerson: {
       type: String,
       required: true,

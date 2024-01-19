@@ -30,6 +30,12 @@ import { ReportImpactBtn } from "@/components/ReportImpact";
 import { HeaderGroup } from "@/components/HeaderGroup";
 
 import axios from "axios";
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 
 const formSchema = z.object({
   name: z
@@ -39,6 +45,21 @@ const formSchema = z.object({
     })
     .max(50),
   age: z.string(),
+  photo: z
+    .any()
+    .refine(
+      (files) => {
+        return Array.from(files).every((file) => file instanceof File);
+      },
+      { message: "Expected a file" },
+    )
+    .refine(
+      (files) =>
+        Array.from(files).every((file) =>
+          ACCEPTED_IMAGE_TYPES.includes(file.type),
+        ),
+      "Only these types are allowed .jpg, .jpeg, .png and .webp",
+    ),
   skinColor: z.string().min(2),
   languages: z.string().min(3),
   reportedBy: z.string().min(2, {
@@ -91,27 +112,34 @@ function ProfileForm() {
       reportedBy: "",
       phoneNumber: "",
       relationshipWithPerson: "",
+      photo: "",
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    await axios
-      .post(process.env.NEXT_PUBLIC_BASE_URL + "/api/missing-persons", values)
-      .then((res) => {
-        toast({
-          title: "Success",
-          description: res.data.reportedBy + ", We've received your request.",
-        });
-        setTimeout(() => {
-          router.push("/");
-        }, 300);
-      })
-      .catch((err) => {
-        console.log(err);
+    const data = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      data.append(key, value);
+    });
+
+    try {
+      const res = await axios.post(
+        process.env.NEXT_PUBLIC_BASE_URL + "/api/missing-persons",
+        data,
+      );
+
+      toast({
+        title: "Success",
+        description: res.data.reportedBy + ", We've received your request.",
       });
+
+      setTimeout(() => {
+        router.push("/");
+      }, 300);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -119,8 +147,29 @@ function ProfileForm() {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 lg:w-[70%] mx-auto"
+        encType="multipart/form-data"
       >
         <p className="text-em-red font-semibold">Missing Person Details</p>
+        <FormField
+          control={form.control}
+          name="photo"
+          render={({ field: { value, onChange, ...fieldProps } }) => (
+            <FormItem>
+              <FormLabel>Photo</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) =>
+                    onChange(event.target.files && event.target.files[0])
+                  }
+                  {...fieldProps}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="name"

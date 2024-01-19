@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { Card } from "@/components/Card";
 import { ActionBox } from "@/components/ActionBox";
@@ -22,6 +23,7 @@ export default async function Home() {
   const data: {
     name: string;
     age: string;
+    photo: string;
     skinColor: string;
     languages: string;
     reportedBy: string;
@@ -61,7 +63,14 @@ export default async function Home() {
                   href="/missing-person"
                   className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border border-em-grey"
                 >
-                  <div className="w-[40%]">IMG</div>
+                  <div className="w-[40%] relative">
+                    <Image
+                      src={person.photo}
+                      alt={person.name}
+                      fill
+                      className="object-cover"
+                    ></Image>
+                  </div>
                   <div className="font-semibold text-sm">
                     <p className="text-xl">{person.name}</p>
                     <p>
