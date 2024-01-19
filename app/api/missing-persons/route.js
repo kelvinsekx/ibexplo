@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 
 import { promises as fs } from "fs";
-import { tmpdir } from "os";
 import { join } from "path";
 
 import connectDB from "@/lib/connect-db";
