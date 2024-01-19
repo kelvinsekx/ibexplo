@@ -74,6 +74,6 @@ export const POST = async (request) => {
       status: 500,
     });
   }
-  console.log("worked");
+
   return new NextResponse(JSON.stringify(missingPerson), { status: 200 });
 };
