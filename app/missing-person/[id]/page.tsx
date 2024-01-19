@@ -11,14 +11,17 @@ async function getData(id: string) {
   );
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    console.log(res);
+    throw new Error("Failed to fetch data");
   }
   return res.json();
 }
 
-export default async function SingleMissingPerson({ params }) {
+export default async function SingleMissingPerson({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
-  console.log(id);
   const person = await getData(id);
   return (
     <div className="space-y-[26px] py-6">
