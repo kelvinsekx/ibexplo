@@ -30,12 +30,12 @@ import { ReportImpactBtn } from "@/components/ReportImpact";
 import { HeaderGroup } from "@/components/HeaderGroup";
 
 import axios from "axios";
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
+// const ACCEPTED_IMAGE_TYPES = [
+//   "image/jpeg",
+//   "image/jpg",
+//   "image/png",
+//   "image/webp",
+// ];
 
 const formSchema = z.object({
   name: z
@@ -45,21 +45,19 @@ const formSchema = z.object({
     })
     .max(50),
   age: z.string(),
-  photo: z
-    .any()
-    .refine(
-      (files) => {
-        return Array.from(files).every((file) => file instanceof File);
-      },
-      { message: "Expected a file" },
-    )
-    .refine(
-      (files) =>
-        Array.from(files).every((file as File) =>
-          ACCEPTED_IMAGE_TYPES.includes(file.type),
-        ),
-      "Only these types are allowed .jpg, .jpeg, .png and .webp",
-    ),
+  photo: z.any().refine(
+    (files) => {
+      return Array.from(files).every((file) => file instanceof File);
+    },
+    { message: "Expected a file" },
+  ),
+  // .refine(
+  //   (files) =>
+  //     Array.from(files).every((file) =>
+  //       ACCEPTED_IMAGE_TYPES.includes(file.type),
+  //     ),
+  //   "Only these types are allowed .jpg, .jpeg, .png and .webp",
+  // ),
   skinColor: z.string().min(2),
   languages: z.string().min(3),
   reportedBy: z.string().min(2, {
