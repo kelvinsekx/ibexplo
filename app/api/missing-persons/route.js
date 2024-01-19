@@ -65,7 +65,7 @@ export const POST = async (request) => {
     } else {
       // Handle the case when no file is provided
       console.log("No file provided");
-      return new NextResponse("Error in fetching resources " + err.message, {
+      return new NextResponse("No File Error " + err.message, {
         status: 500,
       });
     }
