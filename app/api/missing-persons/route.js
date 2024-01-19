@@ -28,13 +28,11 @@ export const POST = async (request) => {
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
-
+  let missingPerson = [];
   try {
     await connectDB();
     const data = await request.formData();
     const file = data.get("photo");
-
-    let missingPerson = [];
 
     if (file) {
       // Read the file contents
