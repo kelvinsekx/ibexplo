@@ -138,7 +138,6 @@ function ProfileForm() {
         router.push("/");
       }, 300);
     } catch (err) {
-      console.log(err);
       setError(true);
     }
     setServering(false);
