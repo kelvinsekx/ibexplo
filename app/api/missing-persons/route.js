@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 
 import { promises as fs } from "fs";
@@ -8,7 +8,7 @@ import { join } from "path";
 import connectDB from "@/lib/connect-db";
 import { MissingPerson } from "@/models/MissingPerson";
 
-export const GET = async (request: NextRequest) => {
+export const GET = async (request) => {
   try {
     await connectDB();
     const missingPerson = await MissingPerson.find();
@@ -20,7 +20,7 @@ export const GET = async (request: NextRequest) => {
   }
 };
 
-export const POST = async (request: NextRequest) => {
+export const POST = async (request) => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -50,7 +50,6 @@ export const POST = async (request: NextRequest) => {
       // Delete the temporary file
       await fs.unlink(tempFilePath);
 
-      console.log(result);
       const person = {
         name: data.get("name"),
         photo: result.secure_url,
@@ -61,7 +60,7 @@ export const POST = async (request: NextRequest) => {
         phoneNumber: data.get("phoneNumber"),
         relationshipWithPerson: data.get("relationshipWithPerson"),
       };
-      // console.log(person);
+
       missingPerson = await MissingPerson.create(person);
     } else {
       // Handle the case when no file is provided
