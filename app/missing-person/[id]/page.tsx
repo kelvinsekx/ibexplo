@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
+import { HeaderGroup } from "@/components/HeaderGroup";
 
 async function getData(id: string) {
   const res = await fetch(
@@ -25,13 +27,16 @@ export default async function SingleMissingPerson({
   const person = await getData(id);
   return (
     <div className="space-y-[26px] py-6">
-      <hgroup className="text-4xl font-medium text-center">
+      <HeaderGroup>
         <p>Missing person</p>
         <p className="text-em-black text-[72%]">
           Create a missing person record
         </p>
-        <p className="text-base">Fill appropriately and accordingly</p>
-      </hgroup>
+        <p className="text-base font-bold text=[50%]">
+          Fill appropriately and accordingly
+        </p>
+      </HeaderGroup>
+
       <div>
         <div className="lg:w-[80%] mx-auto space-y-[32px]">
           <article id="missing-person-components" className="space-y-3">
