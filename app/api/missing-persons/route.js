@@ -39,7 +39,7 @@ export const POST = async (request) => {
       const fileBuffer = await file.arrayBuffer();
 
       // Create a temporary file with the Buffer content
-      const tempFilePath = join(tmpdir(), `temp_${Date.now()}.png`);
+      const tempFilePath = `/tmp/temp_${Date.now()}.png`;
       await fs.writeFile(tempFilePath, Buffer.from(fileBuffer));
 
       // Upload the file to Cloudinary
@@ -65,7 +65,7 @@ export const POST = async (request) => {
     } else {
       // Handle the case when no file is provided
       console.log("No file provided");
-      return new NextResponse("No File Error " + err.message, {
+      return new NextResponse("No File " + err.message, {
         status: 500,
       });
     }
