@@ -30,7 +30,7 @@ export const POST = async (request) => {
   try {
     await connectDB();
     const data = await request.formData();
-    const file: File = data.get("photo");
+    const file = data.get("photo");
 
     let missingPerson = [];
 
