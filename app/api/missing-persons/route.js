@@ -3,9 +3,6 @@ process.noDeprecation = true;
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 
-import { promises as fs } from "fs";
-import { join } from "path";
-
 import connectDB from "@/lib/connect-db";
 import { MissingPerson } from "@/models/MissingPerson";
 
@@ -21,33 +18,50 @@ export const GET = async (request) => {
   }
 };
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
+
 export const POST = async (request) => {
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  });
   let missingPerson = [];
+
+  const data = await request.formData();
+  const file = data.get("photo");
+
   try {
     await connectDB();
-    const data = await request.formData();
-    const file = data.get("photo");
 
     if (file) {
       // Read the file contents
       const fileBuffer = await file.arrayBuffer();
 
-      // Create a temporary file with the Buffer content
-      const tempFilePath = `/tmp/temp_${Date.now()}.png`;
-      await fs.writeFile(tempFilePath, Buffer.from(fileBuffer));
+      var mime = file.type;
+      var encoding = "base64";
+      var base64Data = Buffer.from(fileBuffer).toString("base64");
+      var fileUri = "data:" + mime + ";" + encoding + "," + base64Data;
 
       // Upload the file to Cloudinary
-      const result = await cloudinary.uploader.upload(tempFilePath, {
-        resource_type: "auto", // Set the resource type based on the file content
-      });
+      const uploadToCloudinary = () => {
+        return new Promise((resolve, reject) => {
+          var result = cloudinary.uploader
+            .upload(fileUri, {
+              invalidate: true,
+            })
+            .then((result) => {
+              console.log(result);
+              resolve(result);
+            })
+            .catch((error) => {
+              console.log(error);
+              reject(error);
+            });
+        });
+      };
 
-      // Delete the temporary file
-      await fs.unlink(tempFilePath);
+      const result = await uploadToCloudinary();
 
       const person = {
         name: data.get("name"),
@@ -61,10 +75,10 @@ export const POST = async (request) => {
       };
 
       missingPerson = await MissingPerson.create(person);
+      return new NextResponse(JSON.stringify(missingPerson), { status: 200 });
     } else {
       // Handle the case when no file is provided
-      console.log("No file provided");
-      return new NextResponse("No File " + err.message, {
+      return new NextResponse("No File", {
         status: 500,
       });
     }
@@ -73,6 +87,4 @@ export const POST = async (request) => {
       status: 500,
     });
   }
-
-  return new NextResponse(JSON.stringify(missingPerson), { status: 200 });
 };
