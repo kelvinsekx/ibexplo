@@ -60,15 +60,15 @@ export default async function Home() {
               return (
                 <Link
                   key={index}
-                  href="/missing-person"
-                  className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border border-em-grey"
+                  href={"/missing-person/" + person._id}
+                  className="flex px-[22px] pb-8 pt-[17px] rounded-xl items-center w-full gap-6 border border-em-grey"
                 >
-                  <div className="w-[40%] relative">
+                  <div className="w-[40%] h-[8rem] relative">
                     <Image
                       src={person.photo}
                       alt={person.name}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded"
                     ></Image>
                   </div>
                   <div className="font-semibold text-sm">

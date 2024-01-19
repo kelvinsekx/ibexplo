@@ -1,7 +1,25 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
-export default function FindDonate() {
+async function getData(id: string) {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/api/missing-persons/" + id,
+    {
+      cache: "no-store",
+    },
+  );
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    console.log(res);
+  }
+  return res.json();
+}
+
+export default async function SingleMissingPerson({ params }) {
+  const { id } = params;
+  console.log(id);
+  const person = await getData(id);
   return (
     <div className="space-y-[26px] py-6">
       <hgroup className="text-4xl font-medium text-center">
@@ -14,21 +32,30 @@ export default function FindDonate() {
       <div>
         <div className="lg:w-[80%] mx-auto space-y-[32px]">
           <article id="missing-person-components" className="space-y-3">
-            <div className="flex px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 border-2 border-em-grey">
-              <div className="w-[40%]">IMG</div>
+            <div className="flex px-[22px] pb-8 pt-[17px] rounded-xl items-center w-full gap-6 border border-em-grey">
+              <div className="w-[40%] h-[8rem] relative">
+                <Image
+                  src={person.photo}
+                  alt={person.name}
+                  fill
+                  className="object-cover rounded"
+                ></Image>
+              </div>
               <div className="font-semibold text-sm">
-                <p className="text-xl">John doe doe</p>
-                <p>8yrs, Dark skin</p>
-                <p>Speaks english and yoruba</p>
+                <p className="text-xl">{person.name}</p>
+                <p>
+                  {person.age} yrs, {person.skinColor}
+                </p>
+                <p>Speaks {person.languages}</p>
               </div>
             </div>
           </article>
 
           <div>
             <p className="text-em-red text-base pb-6">Contact details</p>
-            <p>John clarK</p>
-            <p>0800 000 0000</p>
-            <p>Brother</p>
+            <p>{person.reportedBy}</p>
+            <p>{person.phoneNumber}</p>
+            <p>{person.relationshipWithPerson} to missing person.</p>
           </div>
 
           <div className="flex justify-between">
