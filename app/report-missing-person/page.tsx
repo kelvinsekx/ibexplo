@@ -133,15 +133,16 @@ function ProfileForm() {
         title: "Success",
         description: res.data.reportedBy + ", We've received your request.",
       });
+
+      setTimeout(() => {
+        router.push("/");
+      }, 300);
     } catch (err) {
       console.log(err);
       setError(true);
     }
     setServering(false);
-
-    setTimeout(() => {
-      router.push("/");
-    }, 300);
+    return;
   }
 
   return (
