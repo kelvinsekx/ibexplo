@@ -21,6 +21,7 @@ async function getData() {
 }
 export default async function Home() {
   const data: {
+    _id: string;
     name: string;
     age: string;
     photo: string;
