@@ -29,11 +29,8 @@ export default async function SingleMissingPerson({
     <div className="space-y-[26px] py-6">
       <HeaderGroup>
         <p>Missing person</p>
-        <p className="text-em-black text-[72%]">
-          Create a missing person record
-        </p>
-        <p className="text-base font-bold text=[50%]">
-          Fill appropriately and accordingly
+        <p className="text-em-black text-base font-bold text=[50%]">
+          Use this information to report missing person
         </p>
       </HeaderGroup>
 
