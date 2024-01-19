@@ -17,9 +17,9 @@ export const NavigateHome: React.FC<
         <path
           d="M11 21.5L1 11.5L11 1.5"
           stroke="black"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </Link>

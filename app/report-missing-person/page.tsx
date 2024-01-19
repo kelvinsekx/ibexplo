@@ -1,5 +1,5 @@
 "use client";
-
+import * as React from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -97,6 +97,8 @@ export default function ReportMissingPerson() {
 }
 
 function ProfileForm() {
+  const [servering, setServering] = React.useState(false);
+  const [error, setError] = React.useState(false);
   const router = useRouter();
   const { toast } = useToast();
   // 1. Define your form.
@@ -122,22 +124,24 @@ function ProfileForm() {
     });
 
     try {
+      setServering(true);
       const res = await axios.post(
         process.env.NEXT_PUBLIC_BASE_URL + "/api/missing-persons",
         data,
       );
-
       toast({
         title: "Success",
         description: res.data.reportedBy + ", We've received your request.",
       });
-
-      setTimeout(() => {
-        router.push("/");
-      }, 300);
     } catch (err) {
       console.log(err);
+      setError(true);
     }
+    setServering(false);
+
+    setTimeout(() => {
+      router.push("/");
+    }, 300);
   }
 
   return (
@@ -281,8 +285,11 @@ function ProfileForm() {
             </FormItem>
           )}
         />
+        {error && (
+          <p className="text-em-red">Opps, we encountered a server glitch.</p>
+        )}
         <div className="flex justify-end">
-          <Button type="submit">Create</Button>
+          <Button type="submit">{servering ? "..." : "Create"}</Button>
         </div>
       </form>
     </Form>

@@ -66,7 +66,7 @@ export const POST = async (request) => {
       // Handle the case when no file is provided
       console.log("No file provided");
     }
-
+    console.log("worked");
     return new NextResponse(JSON.stringify(missingPerson), { status: 200 });
   } catch (err) {
     return new NextResponse("Error in fetching resources " + err.message, {
