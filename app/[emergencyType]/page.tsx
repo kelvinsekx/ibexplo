@@ -22,7 +22,11 @@ async function getData(type: string) {
     throw new Error("Failed to fetch data");
   }
 }
-export default async function Home({ params }) {
+export default async function Home({
+  params,
+}: {
+  params: { emergencyType: string };
+}) {
   const emergencyType = emergenciesType.filter(
     (e) => e.type === params.emergencyType,
   )[0];
