@@ -1,6 +1,18 @@
-export function Card() {
+import * as React from "react";
+import Link from "next/link";
+
+export const Card = function ({
+  title,
+  to = "",
+}: {
+  title: string;
+  to?: string;
+}) {
   return (
-    <div className="bg-em-red text-white inline-flex flex-col px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 font-semibold">
+    <Link
+      href={to}
+      className="bg-em-red text-white inline-flex flex-col px-[22px] pb-8 pt-[17px] rounded-xl align-center w-full gap-2.5 font-semibold"
+    >
       <div className="flex justify-between items-center">
         <div className="text-xl">Urgent Cause</div>
         <div className="font-bold text-[10px] bg-white/[.4] rounded-large flex justify-center align-center p-3">
@@ -8,7 +20,7 @@ export function Card() {
         </div>
       </div>
       <div className="flex justify-between text-4xl items-baseline">
-        <div>Bodija Bomb Blast</div>
+        <div>{title}</div>
         <div className="w-6 h-6">
           <svg
             viewBox="0 0 24 24"
@@ -33,6 +45,6 @@ export function Card() {
           </svg>
         </div>
       </div>
-    </div>
+    </Link>
   );
-}
+};

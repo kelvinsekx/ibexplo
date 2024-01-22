@@ -29,6 +29,7 @@ export const POST = async (request) => {
   let missingPerson = [];
 
   const data = await request.formData();
+  console.log(data);
   const file = data.get("photo");
 
   try {
@@ -51,7 +52,6 @@ export const POST = async (request) => {
               invalidate: true,
             })
             .then((result) => {
-              console.log(result);
               resolve(result);
             })
             .catch((error) => {
@@ -67,6 +67,7 @@ export const POST = async (request) => {
         name: data.get("name"),
         photo: result.secure_url,
         age: data.get("age"),
+        type: data.get("type"),
         skinColor: data.get("skinColor"),
         languages: data.get("languages"),
         reportedBy: data.get("reportedBy"),

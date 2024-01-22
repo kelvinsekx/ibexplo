@@ -72,7 +72,8 @@ const formSchema = z.object({
   relationshipWithPerson: z.string().min(4).max(14),
 });
 
-export default function ReportMissingPerson() {
+export default function ReportMissingPerson({ searchParams }) {
+  console.log(searchParams.type);
   return (
     <div className="space-y-[26px] py-6">
       <NavigateHome />
@@ -84,7 +85,7 @@ export default function ReportMissingPerson() {
         <p className="text-[40%]">Fill appropriately and accordingly</p>
       </HeaderGroup>
       <div className="space-y-[32px]">
-        <ProfileForm />
+        <ProfileForm type={searchParams.type} />
         <footer className="text-center pt-40 flex flex-col justify-center">
           <ReportImpactBtn />
           <small className="text-xs pt-10">
@@ -96,7 +97,7 @@ export default function ReportMissingPerson() {
   );
 }
 
-function ProfileForm() {
+function ProfileForm({ type }: { type: string }) {
   const [servering, setServering] = React.useState(false);
   const [error, setError] = React.useState(false);
   const router = useRouter();
@@ -122,6 +123,8 @@ function ProfileForm() {
     Object.entries(values).forEach(([key, value]) => {
       data.append(key, value);
     });
+
+    data.append("type", type);
 
     try {
       setServering(true);
@@ -151,7 +154,12 @@ function ProfileForm() {
         className="space-y-8 lg:w-[70%] mx-auto"
         encType="multipart/form-data"
       >
-        <p className="text-em-red font-semibold">Missing Person Details</p>
+        <p className="text-em-red font-semibold flex items-center justify-between">
+          <span>Missing Person Details</span>
+          <span className="font-bold bg-em-red/[.4] rounded-large flex justify-center align-center p-3">
+            {type}
+          </span>
+        </p>
         <FormField
           control={form.control}
           name="photo"
