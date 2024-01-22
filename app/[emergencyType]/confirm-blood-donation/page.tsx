@@ -46,7 +46,7 @@ const formSchema = z.object({
 export default function ReportMissingPerson({
   params,
 }: {
-  params: { emergencyType: string };
+  params: { emergencyType: keyof typeof hospitals };
 }) {
   return (
     <div className="space-y-[26px] py-6">
