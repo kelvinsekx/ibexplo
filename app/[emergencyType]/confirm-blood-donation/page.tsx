@@ -43,7 +43,11 @@ const formSchema = z.object({
   phone: z.string().min(10).max(14),
 });
 
-export default function ReportMissingPerson() {
+export default function ReportMissingPerson({
+  params,
+}: {
+  params: { emergencyType: string };
+}) {
   return (
     <div className="space-y-[26px] py-6">
       <NavigateHome />
@@ -57,13 +61,13 @@ export default function ReportMissingPerson() {
         </p>
       </HeaderGroup>
       <div className="space-y-[32px]">
-        <ProfileForm />
+        <ProfileForm emergencyType={params.emergencyType} />
       </div>
     </div>
   );
 }
 
-function ProfileForm() {
+function ProfileForm({ emergencyType }: { emergencyType: string }) {
   const router = useRouter();
   const { toast } = useToast();
   // 1. Define your form.
@@ -118,7 +122,7 @@ function ProfileForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {hospitals.map((hospital, index) => {
+                  {hospitals[emergencyType].map((hospital, index) => {
                     return (
                       <SelectItem key={index} value={hospital.name}>
                         {hospital.name}

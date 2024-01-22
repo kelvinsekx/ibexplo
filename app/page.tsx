@@ -82,7 +82,6 @@ export default async function Home() {
           </article>
         </div>
         <footer className="text-center pt-40 flex flex-col justify-center">
-          <ReportImpactBtn />
           <small className="text-xs pt-10">
             Updates are real time, Last Website Update : 10:07AM
           </small>

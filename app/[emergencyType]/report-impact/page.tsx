@@ -4,11 +4,15 @@ import Link from "next/link";
 import { NavigateHome } from "@/components/NavigateHome";
 import { HeaderGroup } from "@/components/HeaderGroup";
 
-export default function ReportImpact() {
+export default function ReportImpact({
+  params,
+}: {
+  params: { emergencyType: string };
+}) {
   return (
     <div>
       <ReportImpact.Navigation />
-      <Impacts />
+      <Impacts emergencyType={params.emergencyType} />
       <ReportImpact.Footer />
     </div>
   );
@@ -26,12 +30,12 @@ const Navigation = () => {
 };
 ReportImpact.Navigation = Navigation;
 
-const Impacts = () => {
+const Impacts = ({ emergencyType }: { emergencyType: string }) => {
   return (
     <div className="flex flex-col gap-6 items-center">
       <ReportImpact.ImpactCard>
         <Link
-          href="/confirm-blood-donation"
+          href={"confirm-blood-donation"}
           className="flex flex-col items-center"
         >
           <div className="relative w-20 h-20">
