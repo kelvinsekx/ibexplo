@@ -2,7 +2,11 @@ import { NavigateHome } from "@/components/NavigateHome";
 import { FindHospital } from "@/components/FindHospital";
 import { hospitals } from "@/lib/static-db";
 
-export default function FindDonate({ params }) {
+export default function FindDonate({
+  params,
+}: {
+  params: { emergencyType: keyof typeof hospitals };
+}) {
   return (
     <div className="space-y-[26px] py-6">
       <NavigateHome />
