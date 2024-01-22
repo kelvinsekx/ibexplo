@@ -67,7 +67,11 @@ export default function ReportMissingPerson({
   );
 }
 
-function ProfileForm({ emergencyType }: { emergencyType: string }) {
+function ProfileForm({
+  emergencyType,
+}: {
+  emergencyType: keyof typeof hospitals;
+}) {
   const router = useRouter();
   const { toast } = useToast();
   // 1. Define your form.
