@@ -72,7 +72,11 @@ const formSchema = z.object({
   relationshipWithPerson: z.string().min(4).max(14),
 });
 
-export default function ReportMissingPerson({ searchParams }) {
+export default function ReportMissingPerson({
+  searchParams,
+}: {
+  searchParams: { type: string };
+}) {
   console.log(searchParams.type);
   return (
     <div className="space-y-[26px] py-6">
